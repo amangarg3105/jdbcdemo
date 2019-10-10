@@ -1,13 +1,21 @@
 package com.jdbcdemo;
 
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "posts")
 public class Post {
 
+	@Id
 	private int id;
 
 	private String title;
 
 	private String description;
-
 
 	public int getId() {
 		return id;

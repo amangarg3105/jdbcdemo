@@ -18,4 +18,14 @@ public class HomeController {
 		Post[] posts = postService.getAllPost();
 		return  posts[0];
 	}
+
+
+	@RequestMapping("/post")
+	@ResponseBody
+	public Post getPosts() {
+		Post post = postService.getPostUsingJPA();
+		return  post;
+	}
+
+
 }
