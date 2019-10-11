@@ -27,5 +27,12 @@ public class HomeController {
 		return  post;
 	}
 
+	@RequestMapping("/insert")
+	@ResponseBody
+	public boolean insertPost() {
+		return postService.insertPost();
+	}
+
+
 
 }
