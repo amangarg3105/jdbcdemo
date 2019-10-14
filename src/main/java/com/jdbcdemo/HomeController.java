@@ -34,5 +34,17 @@ public class HomeController {
 	}
 
 
+	@RequestMapping("/delete")
+	@ResponseBody
+	public boolean deletePost() {
+		return postService.deletePost();
+	}
+
+
+	@RequestMapping("/update")
+	@ResponseBody
+	public boolean updatePost() {
+		return postService.updatePost();
+	}
 
 }

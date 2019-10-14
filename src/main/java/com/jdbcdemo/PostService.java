@@ -1,20 +1,23 @@
 package com.jdbcdemo;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
-import javax.persistence.Persistence;
 import java.sql.*;
-import java.util.Map;
+
 
 @Service
 public class PostService {
 
 //	@PersistenceContext(name = "")
 //	EntityManager entityManager;
+
+	@Autowired
+	DatabaseLayer databaseLayer;
+
+
 
 	public Post[] getAllPost() {
 		Post[] posts = new Post[5];
@@ -72,30 +75,28 @@ public class PostService {
 
 
 	public Post getPostUsingJPA() {
-		EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("xyz");
-		EntityManager entityManager = entityManagerFactory.createEntityManager();
-		Post p = entityManager.find(Post.class, 1);
-		return p;
+		return databaseLayer.getPost(1);
 	}
 
 	public boolean insertPost() {
-		boolean isInserted = false;
 		Post post = new Post();
-		post.setId(3);
-		post.setTitle("New Post");
+		post.setId(4);
+		post.setTitle("New Post 4");
 		post.setDescription("This is new post Descritpion");
-		EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("xyz");
-		EntityManager entityManager = entityManagerFactory.createEntityManager();
-		EntityTransaction transaction = entityManager.getTransaction();
-		try {
-			transaction.begin();
-			entityManager.persist(post);
-			transaction.commit();
-			isInserted = true;
-		}catch(Exception e) {
-			transaction.rollback();
-		}
-		return isInserted;
+		return databaseLayer.insertPost(post);
 	}
+
+
+	public boolean updatePost() {
+		return databaseLayer.updatePost();
+	}
+
+	public boolean deletePost() {
+		Post p = databaseLayer.getPost(1);
+	    boolean isDeleted =	databaseLayer.delete(p);
+		return isDeleted;
+	}
+
+
 
 }

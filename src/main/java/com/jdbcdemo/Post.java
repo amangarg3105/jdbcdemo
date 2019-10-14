@@ -40,4 +40,9 @@ public class Post {
 	public void setDescription(String description) {
 		this.description = description;
 	}
+
+
+	public void createPost() {
+		System.out.println("Tryin to create the post");
+	}
 }
