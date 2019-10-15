@@ -72,10 +72,16 @@ public class PostService {
 		return posts;
 	}
 
-
-
 	public Post getPostUsingJPA() {
+		Post p = new Post();
 		return databaseLayer.getPost(1);
+	}
+
+
+	public Post getPostUsingJPA(int id) {
+
+		Post p = new Post();
+		return databaseLayer.getPost(id);
 	}
 
 	public boolean insertPost() {

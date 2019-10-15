@@ -4,6 +4,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.*;
+import java.util.List;
 
 
 @Repository
@@ -17,9 +18,11 @@ public class DatabaseLayer {
 
 	public Post getPost(int id) {
 	//	EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("xyz");
-	//	EntityManager entityManager = entityManagerFactory.createEntityManager();
+		EntityManager entityManager = entityManagerFactory.createEntityManager();
 		entityManager = entityManagerFactory.createEntityManager();
 		Post p = entityManager.find(Post.class, id);
+		TypedQuery<Post> query = entityManager.createQuery("SELECT p from Post p", Post.class);
+		List<Post> resultList = query.getResultList();
 		return p;
 	}
 
@@ -60,6 +63,10 @@ public class DatabaseLayer {
 
 
 	public  boolean updatePost() {
+//		Post post1 = new Post();
+//		post1.setId(10);
+//		post1.setTitle("This is title");
+//		post1.setDescription("This is desc");
 		boolean isUpdated = false;
 		entityManager = entityManagerFactory.createEntityManager();
 		Post p1 = entityManager.find(Post.class, 2);

@@ -2,8 +2,7 @@ package com.jdbcdemo;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class HomeController {
@@ -46,5 +45,21 @@ public class HomeController {
 	public boolean updatePost() {
 		return postService.updatePost();
 	}
+
+	@RequestMapping("/post/{postId}")
+	@ResponseBody
+	public Post getPostById(@PathVariable("postId") int id) {
+		return postService.getPostUsingJPA(id);
+	}
+
+	@RequestMapping("/postParam")
+	@ResponseBody
+	public Post getPostById(@RequestParam("id") Integer id) {
+		return postService.getPostUsingJPA(id);
+	}
+
+
+
+
 
 }
